@@ -38,19 +38,15 @@
       "vm_name": "MyCentOS7"
     }
   ],
+  "provisioners": [
+    {
+      "scripts": "install.sh",
+      "type": "shell"
+    }
+  ],
   "variables": {
     "checksum": "5b61d5b378502e9cba8ba26b6696c92a",
     "iso": "file:///root/CentOS-7-x86_64-DVD-1810.iso"
-  },
-
-"provisioners": [
-    {
-      "type": "shell",
-      "scripts": "install.sh"
-    }
-  ]
-
+  }
 }
-
-
 

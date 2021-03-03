@@ -4,7 +4,7 @@
       "boot_command": [
         "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
       ],
-      "disk_size": "10240",
+      "disk_size": "50240",
       "guest_os_type": "RedHat_64",
       "http_directory": "http",
       "iso_checksum": "md5:{{ user `checksum` }}",

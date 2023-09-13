@@ -1,14 +1,16 @@
 on: [push]
 
-jobs:
-  build:
-    name: Greeting
-    runs-on: self-hosted
-    steps:
-    - uses: actions/checkout@v2
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
-        sudo ./install.sh 
+  - name: Set and Retrieve Github ENV variables
+    shell: bash
+    run: |
 
+      # define variables      
+      tests=16
+      failures=2
+
+      # set them as GitHub ENV variables
+      echo "Tests=$tests" >> $GITHUB_ENV
+      echo "Failures=$failures" >> $GITHUB_ENV
+
+      # retrieve these GitHub ENV variables
+      echo "${{ env.Failures }} out of ${{ env.Tests }} tests failed on CI"

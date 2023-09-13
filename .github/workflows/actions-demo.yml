@@ -1,16 +1,22 @@
-on: [push]
+name: Set and Retrieve GitHub ENV variables
 
-  - name: Set and Retrieve Github ENV variables
-    shell: bash
-    run: |
+on:
+  push:
 
-      # define variables      
-      tests=16
-      failures=2
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-      # set them as GitHub ENV variables
-      echo "Tests=$tests" >> $GITHUB_ENV
-      echo "Failures=$failures" >> $GITHUB_ENV
+    steps:
+      - name: Set and Retrieve GitHub ENV variables
+        run: |
+          # Define variables
+          tests=16
+          failures=2
 
-      # retrieve these GitHub ENV variables
-      echo "${{ env.Failures }} out of ${{ env.Tests }} tests failed on CI"
+          # Set them as GitHub ENV variables
+          echo "Tests=$tests" >> $GITHUB_ENV
+          echo "Failures=$failures" >> $GITHUB_ENV
+
+          # Retrieve these GitHub ENV variables
+          echo "${{ env.Failures }} out of ${{ env.Tests }} tests failed on CI"

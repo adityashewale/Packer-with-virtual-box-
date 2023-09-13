@@ -18,3 +18,4 @@ jobs:
     GITHUB_TOKEN: ${{ secrets.token }}
   with:
     tag_name: ${{ env.TAG_NAME }}
+

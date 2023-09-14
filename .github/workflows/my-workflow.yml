@@ -1,0 +1,11 @@
+name: My Manual work flow 
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted 
+    steps: 
+       - run: |
+          nproc

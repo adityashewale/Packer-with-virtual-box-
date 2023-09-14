@@ -1,0 +1,20 @@
+env:
+  CONCURRENCY: "$(nproc)"
+  MAKEFLAGS: "-j ${CONCURRENCY}"
+  GPG_TTY: $(tty)
+
+
+on: [push]
+
+jobs:
+  build:
+    name: testing
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Run a multi-line script
+      run: |
+         echo "$CONCURRENCY"
+         echo "$MAKEFLAGS"

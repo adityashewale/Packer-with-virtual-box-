@@ -1,20 +1,14 @@
-env:
-  CONCURRENCY: $(nproc)
-  MAKEFLAGS: "-j ${CONCURRENCY}"
-  GPG_TTY: $(tty)
-
-
 on: [push]
 
 jobs:
-  build:
-    name: testing
+  hello_world_job:
     runs-on: self-hosted
+    name: A job to say hello
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Run a multi-line script
-      run: |
-         echo "$CONCURRENCY"
-         echo "$MAKEFLAGS"
+      - uses: actions/checkout@v3
+      - id: foo
+        uses: actions/hello-world-composite-action@v1
+        with:
+          who-to-greet: 'Mona the Octocat'
+      - run: echo $a;echo $CONCURRENCY;echo $myvar
+        shell: bash

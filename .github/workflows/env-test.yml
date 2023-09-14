@@ -1,5 +1,5 @@
 env:
-  CONCURRENCY: "$(nproc)"
+  CONCURRENCY: $(nproc)
   MAKEFLAGS: "-j ${CONCURRENCY}"
   GPG_TTY: $(tty)
 

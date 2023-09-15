@@ -1,14 +1,23 @@
+name: Parallel App Build Workflow
 on: [push]
-
 jobs:
-  hello_world_job:
+  build:
     runs-on: self-hosted
-    name: A job to say hello
     steps:
-      - uses: actions/checkout@v2
-      - id: foo
-        uses: actions/hello-world-composite-action@v1
-        with:
-          who-to-greet: 'Mona the Octocat'
-      - run: echo $a;echo $CONCURRENCY;echo $myvar
-        shell: bash
+      - run: |
+          echo "Build Application"
+          # [...]
+  integration-testing:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - run: |
+          echo "Integration Testing"
+          # [...]
+  functional-testing:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - run: |
+          echo "Functional Testing"
+          # [...]

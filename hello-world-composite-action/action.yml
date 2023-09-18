@@ -24,3 +24,4 @@ runs:
     - run: goodbye.sh
       shell: bash
     - run: echo "$GPG_TTY  $BEEGFS_VERSION   $MAKEFLAGS  $CONCURRENCY"
+      shell: bash

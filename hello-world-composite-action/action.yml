@@ -19,7 +19,7 @@ runs:
       shell: bash
     - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
       shell: bash 
-    - run: export a=abc 
+    - run: export a=abc; echo $a; echo "$a" 
       shell: bash 
     - run: goodbye.sh
       shell: bash

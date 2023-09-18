@@ -20,7 +20,7 @@ jobs:
           name: my-artifact
           path: build.txt 
       - run: |
-          echo "Integration Testing"; cat build.txt
+          echo "Integration Testing";ls -ltrh 
 
   functional-testing:
     needs: build

@@ -1,0 +1,36 @@
+name: Parallel App Build Workflow
+on: [push]
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - run: |
+          echo "Build Application" > build.txt
+      - uses: actions/upload-artifact@master
+        with:
+          name: my-artifact
+          path: build.txt
+
+  integration-testing:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - uses: actions/download-artifact@master
+        with:
+          name: my-artifact
+          path: build.txt 
+      - run: |
+          echo "Integration Testing"; cat build.txt
+
+  functional-testing:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - run: |
+          echo "Functional Testing";hostname
+  third-job-testing:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - run: |
+          echo "3rd job testing ";hostname

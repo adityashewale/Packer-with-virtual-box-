@@ -5,14 +5,14 @@ jobs:
     runs-on: self-hosted
     steps:
       - run: |
-          echo "Build Application"
+          echo "Build Application" > build.txt
           # [...]
   integration-testing:
     needs: build
     runs-on: self-hosted
     steps:
       - run: |
-          echo "Integration Testing"
+          echo "Integration Testing"; cat build.txt
           # [...]
   functional-testing:
     needs: build

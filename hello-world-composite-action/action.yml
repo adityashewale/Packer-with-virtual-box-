@@ -19,8 +19,6 @@ runs:
       shell: bash
     - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
       shell: bash 
-    - run: echo "myvar" >> $myvar
-      shell: bash 
     - run: export a=abc 
       shell: bash 
     - run: goodbye.sh

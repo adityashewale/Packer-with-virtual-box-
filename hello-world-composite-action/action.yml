@@ -23,5 +23,5 @@ runs:
       shell: bash 
     - run: goodbye.sh
       shell: bash
-    - run: echo $a 
+    - run: echo "$a "
       shell: bash

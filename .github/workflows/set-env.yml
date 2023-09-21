@@ -10,9 +10,3 @@ jobs:
     - name: Test
       run: echo $GITHUB_SHA_SHORT $CONCURRENCY
 
-   integration-testing:
-    needs: build
-    runs-on: self-hosted
-    steps:
-      - run: |
-          echo $GITHUB_SHA_SHORT $CONCURRENCY

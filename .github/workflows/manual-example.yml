@@ -1,12 +1,36 @@
-name: Manual Workflow
+name: Multi-Trigger Workflow
 
 on:
   workflow_dispatch:
+    inputs:
+      trigger1:
+        description: 'Trigger 1'
+        inputs:
+          param1:
+            description: 'Parameter 1 for Trigger 1'
+            required: true
+      trigger2:
+        description: 'Trigger 2'
+        inputs:
+          param2:
+            description: 'Parameter 1 for Trigger 2'
+            required: true
 
 jobs:
-  build:
-    runs-on: self-hosted 
-    steps: 
-       - run: |
-          cat /etc/redhat-release
-          $NPROC
+  trigger1_job:
+    runs-on: ubuntu-latest
+    if: github.event.inputs.trigger == 'trigger1'
+
+    steps:
+    - name: Step for Trigger 1
+      run: |
+        echo "Trigger 1 executed with param1=${{ github.event.inputs.param1 }}"
+
+  trigger2_job:
+    runs-on: ubuntu-latest
+    if: github.event.inputs.trigger == 'trigger2'
+
+    steps:
+    - name: Step for Trigger 2
+      run: |
+        echo "Trigger 2 executed with param2=${{ github.event.inputs.param2 }}"

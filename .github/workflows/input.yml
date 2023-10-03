@@ -14,8 +14,8 @@ jobs:
   greet:
     runs-on: self-hosted 
     container:
-      image: ${{ github.event.inputs.message }}
+      image: ${{ github.event.inputs.name }}
 
     steps:
     - name: Send greeting
-      run: echo "${{ github.event.inputs.message }}     ${{ github.event.inputs.name }}"
+      run: echo "${{ github.event.inputs.name }}"

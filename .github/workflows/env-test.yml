@@ -1,0 +1,28 @@
+name: Parallel App Build Workflow
+on: [push]
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - run: |
+          echo "Build Application" > build.txt
+          # [...]
+  integration-testing:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - run: |
+          echo "Integration Testing"; cat build.txt
+          # [...]
+  functional-testing:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - run: |
+          echo "Functional Testing";hostname
+  third-job-testing:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - run: |
+          echo "3rd job testing ";hostname

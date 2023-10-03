@@ -7,10 +7,8 @@ on:
         type: choice
         description: Who to greet
         options: 
-        - monalisa
-        - cschleiden
-      message:
-        required: true
+        - thinkpranav/x86_64-ubuntu20.04@sha256:667f2b5384785a4e0fcbcbc7a4c6a912fb9008b11789ece6a0ba3964aa3b43e7
+        - thinkpranav/x86_64-rocky8.4-mlnx5.4@sha256:056476c3b168526de08a5f102440c9aa1d7b0827a8e91e3ea84065974390b765
      
 jobs:
   greet:

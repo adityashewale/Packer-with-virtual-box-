@@ -20,4 +20,4 @@ jobs:
 
     steps:
     - name: Send greeting
-      run: echo "${{ github.event.inputs.message }}"
+      run: echo "${{ github.event.inputs.message }}     ${{ github.event.inputs.name }}"

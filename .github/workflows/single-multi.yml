@@ -1,6 +1,8 @@
 name: single and multi job testing 
 
+on:
   workflow_dispatch:
+  
     inputs:
       run-specific-job:
         description: 'Run a specific job'

@@ -32,7 +32,7 @@ jobs:
   specific-job:
     name: Specific Job
     runs-on: self-hosted
-    if: github.event.inputs.run-specific-job == 'true'
+    if: github.event.inputs.run-specific-job == 'true'  || github.event.inputs.run-specific-job == '1'
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2

@@ -16,7 +16,7 @@ jobs:
   build:
     name: Job for Ubuntu 20.04
     runs-on: self-hosted
-    if:  GitHub.event.inputs.name == 'All'  ||  github.event.inputs.name == 'thinkpranav/x86_64-ubuntu20.04'
+    if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'thinkpranav/x86_64-ubuntu20.04'
     container:
        image: thinkpranav/x86_64-ubuntu20.04@sha256:667f2b5384785a4e0fcbcbc7a4c6a912fb9008b11789ece6a0ba3964aa3b43e7
     steps:
@@ -29,7 +29,7 @@ jobs:
   rocky_linux:
     name: Client rebuild for rocky8.4
     runs-on: self-hosted
-    if:  GitHub.event.inputs.name == 'All'  ||  github.event.inputs.name == 'thinkpranav/x86_64-rocky8.4-mlnx5.4'
+    if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'thinkpranav/x86_64-rocky8.4'
     container:
        image: thinkpranav/x86_64-rocky8.4-mlnx5.4@sha256:056476c3b168526de08a5f102440c9aa1d7b0827a8e91e3ea84065974390b765
     steps:

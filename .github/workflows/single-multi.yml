@@ -42,7 +42,7 @@ jobs:
   debian:
     name: Client rebuild for Debian 12
     runs-on: self-hosted
-    if: github.event.inputs.run-specific-job == 'All'  || github.event.inputs.run-specific-job == 'thinkpranav/debian12-amd64'
+    if: GitHub.event.inputs.name == 'All'  ||  github.event.inputs.name == 'thinkpranav/debian12-amd64'
     container:
        image: thinkpranav/debian12-client-build@sha256:26130277c017a216b00df43f9e32d2e03d0e6da6a2d17c7e2e345f9f67186619
     steps:

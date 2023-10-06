@@ -1,41 +1,54 @@
-name: single and multi job testing 
+name: single and multi-job testing 
 
 on:
   workflow_dispatch:
   
-    inputs:
-      run-specific-job:
-        description: 'Run a specific job'
-        required: false
+      inputs: 
+        name:
+        type: choice
+        description: Who to greet
+        options: 
+        - thinkpranav/x86_64-ubuntu20.04
+        - thinkpranav/x86_64-rocky8.4
+        - thinkpranav/debian12-amd64
+        - All
 
 jobs:
   build:
-    name: Build Job
+    name: Job for Ubuntu 20.04
     runs-on: self-hosted
+    if:  GitHub.event.inputs.name == 'All'  ||  github.event.inputs.name == 'thinkpranav/x86_64-ubuntu20.04'
+    container:
+       image: thinkpranav/x86_64-ubuntu20.04@sha256:667f2b5384785a4e0fcbcbc7a4c6a912fb9008b11789ece6a0ba3964aa3b43e7
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-      - name: Build Application
+      - name: Client rebuild
         run: |
-          # Your build commands here
+          cat /etc/os-release 
 
-  test:
-    name: Test Job
+  Rocky8.4:
+    name: Client rebuild for rocky8.4
     runs-on: self-hosted
+    if:  GitHub.event.inputs.name == 'All'  ||  github.event.inputs.name == 'thinkpranav/x86_64-rocky8.4-mlnx5.4'
+    container:
+       image: thinkpranav/x86_64-rocky8.4-mlnx5.4@sha256:056476c3b168526de08a5f102440c9aa1d7b0827a8e91e3ea84065974390b765
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
       - name: Run Tests
         run: |
-          # Your test commands here
+          cat /etc/redhat-release
 
-  specific-job:
-    name: Specific Job
+  Debian12:
+    name: Client rebuild for Debian 12
     runs-on: self-hosted
-    if: github.event.inputs.run-specific-job == 'true'  || github.event.inputs.run-specific-job == '1'
+    if: github.event.inputs.run-specific-job == 'All'  || github.event.inputs.run-specific-job == 'thinkpranav/debian12-amd64-build-essential'
+    container:
+       image: thinkpranav/debian12-client-build@sha256:26130277c017a216b00df43f9e32d2e03d0e6da6a2d17c7e2e345f9f67186619
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-      - name: Run Specific Job
+      - name: Run client rebuild for Debian 12
         run: |
-          # Your specific job commands here
+          cat /etc/os-release

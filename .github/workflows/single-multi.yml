@@ -2,9 +2,8 @@ name: single and multi-job testing
 
 on:
   workflow_dispatch:
-  
-      inputs: 
-        name:
+    inputs:
+      name:
         type: choice
         description: Who to greet
         options: 

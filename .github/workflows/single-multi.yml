@@ -7,16 +7,16 @@ on:
         type: choice
         description: Who to greet
         options: 
-        - ofed x86_64-alma8.4-mlnx5.4
+        - ofed x86_64-rhel8.3-mlnx5.1
         - thinkpranav/x86_64-rocky8.4
         - thinkpranav/debian12-amd64
         - All
 
 jobs:
-  ubuntu20_04:
+  RHEL_8_3_mlnx_5_1:
     name: Job for Ubuntu 20.04
     runs-on: self-hosted
-    if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'thinkpranav/x86_64-ubuntu20.04'
+    if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed x86_64-rhel8.3-mlnx5.1'
     container:
        image: thinkpranav/x86_64-ubuntu20.04@sha256:667f2b5384785a4e0fcbcbc7a4c6a912fb9008b11789ece6a0ba3964aa3b43e7
     steps:

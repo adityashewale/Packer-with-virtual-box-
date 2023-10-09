@@ -7,6 +7,7 @@ on:
         type: choice
         description: Who to greet
         options: 
+        - ofed x86_64-alma8.4-mlnx5.4
         - thinkpranav/x86_64-ubuntu20.04
         - thinkpranav/x86_64-rocky8.4
         - thinkpranav/debian12-amd64
@@ -26,7 +27,7 @@ jobs:
         run: |
           cat /etc/os-release 
 
-  rocky_linux:
+  
     name: Client rebuild for rocky8.4
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'thinkpranav/x86_64-rocky8.4'

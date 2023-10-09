@@ -7,14 +7,13 @@ on:
         type: choice
         description: Who to greet
         options: 
-        - ofed x86_64-alma8.4-mlnx5.4
         - thinkpranav/x86_64-ubuntu20.04
         - thinkpranav/x86_64-rocky8.4
         - thinkpranav/debian12-amd64
         - All
 
 jobs:
-  build:
+  ubuntu20_04:
     name: Job for Ubuntu 20.04
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'thinkpranav/x86_64-ubuntu20.04'
@@ -26,8 +25,7 @@ jobs:
       - name: Client rebuild
         run: |
           cat /etc/os-release 
-
-  
+  rockylinux_8_4:
     name: Client rebuild for rocky8.4
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'thinkpranav/x86_64-rocky8.4'
@@ -39,8 +37,7 @@ jobs:
       - name: Run Tests
         run: |
           cat /etc/redhat-release
-
-  debian:
+  debian_12:
     name: Client rebuild for Debian 12
     runs-on: self-hosted
     if: GitHub.event.inputs.name == 'All'  ||  github.event.inputs.name == 'thinkpranav/debian12-amd64'

@@ -7,7 +7,7 @@ on:
         type: choice
         description: Who to greet
         options: 
-        - thinkpranav/x86_64-ubuntu20.04
+        - ofed x86_64-alma8.4-mlnx5.4
         - thinkpranav/x86_64-rocky8.4
         - thinkpranav/debian12-amd64
         - All

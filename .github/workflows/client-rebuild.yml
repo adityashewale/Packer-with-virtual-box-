@@ -5,7 +5,7 @@ on:
     inputs:
       name:
         type: choice
-        description: client rebuild with and without MLNX OFED 
+        description: Who to greet
         options: 
         - All
         - ofed x86_64-rhel8.2-mlnx5.0
@@ -45,7 +45,7 @@ RHEL_8_2_mlnx_5_0:
         run: |
           bash .ci/build/client_build.sh /usr/src/linux 
 
-  RHEL_8_3_mlnx_5_1:
+RHEL_8_3_mlnx_5_1:
     name: RHEL 8.3 with MLNX 5.1
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed x86_64-rhel8.3-mlnx5.1'
@@ -58,7 +58,7 @@ RHEL_8_2_mlnx_5_0:
         run: |
           bash .ci/build/client_build.sh /usr/src/linux 
 
-  RHEL_8_3_mlnx_5_2:
+RHEL_8_3_mlnx_5_2:
     name: RHEL 8.3 with MLNX 5.2
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed x86_64-rhel8.3-mlnx5.2'
@@ -72,7 +72,7 @@ RHEL_8_2_mlnx_5_0:
           bash .ci/build/client_build.sh /usr/src/linux 
   
 
-  AlmaLinux_8_4_mlnx_5.4:
+AlmaLinux_8_4_mlnx_5.4:
     name: AlmaLinux 8.4 with MLNX 5.4 
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed x86_64-alma8.4-mlnx5.4'
@@ -86,7 +86,7 @@ RHEL_8_2_mlnx_5_0:
           bash .ci/build/client_build.sh /usr/src/linux
 
 
-  AlmaLinux_8_5_mlnx_5.5:
+AlmaLinux_8_5_mlnx_5.5:
     name: AlmaLinux 8.5 with MLNX 5.5 
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed x86_64-alma8.5-mlnx5.5'
@@ -100,7 +100,7 @@ RHEL_8_2_mlnx_5_0:
           bash .ci/build/client_build.sh /usr/src/linux
 
 
-  AlmaLinux_8_7_mlnx_5.8_lts:
+AlmaLinux_8_7_mlnx_5.8_lts:
     name: AlmaLinux 8.7 with MLNX 5.8 LTS
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed x86_64-alma8.7-mlnx5.8-lts'
@@ -114,7 +114,7 @@ RHEL_8_2_mlnx_5_0:
           bash .ci/build/client_build.sh /usr/src/linux
 
 
-  RockyLinux_8_8_mlnx_5.8_lts:
+RockyLinux_8_8_mlnx_5.8_lts:
     name: RockyLinux 8.8 with MLNX 5.8 LTS
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed x86_64-rocky8.8-mlnx5.8-lts'
@@ -127,7 +127,7 @@ RHEL_8_2_mlnx_5_0:
         run: |
           bash .ci/build/client_build.sh /usr/src/linux
   
-   AlmaLinux_9_mlnx_5.6:
+AlmaLinux_9_mlnx_5.6:
     name: AlmaLinux 9 with MLNX 5.6
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed x86_64-alma9-mlnx5.6'
@@ -140,7 +140,7 @@ RHEL_8_2_mlnx_5_0:
         run: |
           bash .ci/build/client_build.sh /usr/src/linux
 
-  AlmaLinux_9_mlnx_5.7:
+AlmaLinux_9_mlnx_5.7:
     name: AlmaLinux 9 with MLNX 5.7
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed x86_64-alma9-mlnx5.7'
@@ -153,7 +153,7 @@ RHEL_8_2_mlnx_5_0:
         run: |
           bash .ci/build/client_build.sh /usr/src/linux
 
-  RockyLinux_9.1_mlnx_5.8_lts:
+RockyLinux_9.1_mlnx_5.8_lts:
     name: RockyLinux 9.1 with MLNX 5.8 LTS
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed x86_64-rocky9.1-mlnx5.8-lts'
@@ -167,7 +167,7 @@ RHEL_8_2_mlnx_5_0:
           bash .ci/build/client_build.sh /usr/src/linux
 
 
-  Ubuntu_22_04_mlnx_5.6: 
+Ubuntu_22_04_mlnx_5.6: 
     name: Ubuntu 22.04 with MLNX 5.6 
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed ubuntu-22.04-mlnx-5.6-gcc-11'
@@ -180,7 +180,7 @@ RHEL_8_2_mlnx_5_0:
         run: |
           bash .ci/build/client_build.sh /usr/src/linux
 
-  Ubuntu_22_04_mlnx_5.7: 
+Ubuntu_22_04_mlnx_5.7: 
     name: Ubuntu 22.04 with MLNX 5.7
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed ubuntu-22.04-mlnx-5.7'
@@ -193,7 +193,7 @@ RHEL_8_2_mlnx_5_0:
         run: |
           bash .ci/build/client_build.sh /usr/src/linux-headers-default
 
-  Ubuntu_22_04_mlnx_5.8-lts: 
+Ubuntu_22_04_mlnx_5.8-lts: 
     name: Ubuntu 22.04 with MLNX 5.8 lts 
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed ubuntu-22.04-mlnx-5.8'
@@ -206,7 +206,7 @@ RHEL_8_2_mlnx_5_0:
         run: |
           bash .ci/build/client_build.sh /usr/src/linux
   
-  Ubuntu_23_04: 
+Ubuntu_23_04: 
     name: Ubuntu 23.04
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'distro ubuntu23.04-amd64'
@@ -221,7 +221,7 @@ RHEL_8_2_mlnx_5_0:
 
 
   
-  Debian_10_mlnx_5.2:
+Debian_10_mlnx_5.2:
     name: Debian 10 with mlnx5.2  
     runs-on: self-hosted
     if: GitHub.event.inputs.name == 'All'  ||  github.event.inputs.name == 'ofed x86_64-debian10-mlnx5.2'
@@ -236,7 +236,7 @@ RHEL_8_2_mlnx_5_0:
   
 
 
-  Debian_12:
+Debian_12:
     name: Debian 12 client rebuild 
     runs-on: self-hosted
     if: GitHub.event.inputs.name == 'All'  ||  github.event.inputs.name == 'distro debian12-client-build'
@@ -250,7 +250,7 @@ RHEL_8_2_mlnx_5_0:
           bash .ci/build/client_build.sh /usr/src/linux
   
   
-  Open_suse_15_04: 
+Open_suse_15_04: 
     name: Opensuse 15.04
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed x86_64-open-suse-15.4'
@@ -263,7 +263,7 @@ RHEL_8_2_mlnx_5_0:
         run: |
           bash .ci/build/client_build.sh 
   
-  sles_15_mlnx_5.0: 
+sles_15_mlnx_5.0: 
     name: sles15 mlnx with 5.0
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed x86_64-sles15-mlnx5.0'
@@ -276,7 +276,7 @@ RHEL_8_2_mlnx_5_0:
         run: |
           bash .ci/build/client_build.sh 
   
-  sles15sp2_mlnx_5.1: 
+sles15sp2_mlnx_5.1: 
     name: sles15 sp2 with mlnx5.1
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed x86_64-sles15sp2-mlnx5.1'
@@ -289,7 +289,7 @@ RHEL_8_2_mlnx_5_0:
         run: |
           bash .ci/build/client_build.sh 
   
-  sles15sp3_mlnx_5.5: 
+sles15sp3_mlnx_5.5: 
     name: sles15 sp3 with mlnx5.5
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed x86_64-sles15sp3-mlnx5.5'
@@ -302,7 +302,7 @@ RHEL_8_2_mlnx_5_0:
         run: |
           bash .ci/build/client_build.sh 
   
-  sles15sp3_mlnx_5.5: 
+sles15sp3_mlnx_5.5: 
     name: sles15 sp3 with mlnx5.5
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed x86_64-sles15sp3-mlnx5.5'
@@ -316,7 +316,7 @@ RHEL_8_2_mlnx_5_0:
           bash .ci/build/client_build.sh 
 
 
-  opensuse_15.3_mlnx_5.6: 
+opensuse_15.3_mlnx_5.6: 
     name: opensuse 15.3 with mlnx 5.6
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed x86_64-open-suse-15.3-mlnx5.6'
@@ -331,7 +331,7 @@ RHEL_8_2_mlnx_5_0:
   
 
 
-  sles15_distro: 
+sles15_distro: 
     name: sles15 distro
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'distro x86_64-sles15'
@@ -345,7 +345,7 @@ RHEL_8_2_mlnx_5_0:
           bash .ci/build/client_build.sh 
 
 
-  sles15sp3_distro: 
+sles15sp3_distro: 
     name: sles15sp3 distro
     runs-on: self-hosted
     if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'distro x86_64-sles15sp3'

@@ -302,20 +302,6 @@ sles15sp3_mlnx_5.5:
         run: |
           bash .ci/build/client_build.sh 
   
-sles15sp3_mlnx_5.5: 
-    name: sles15 sp3 with mlnx5.5
-    runs-on: self-hosted
-    if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'ofed x86_64-sles15sp3-mlnx5.5'
-    container:
-       image: thinkpranav/x86_64-sles15sp3-mlnx5.5@sha256:6acf368da06d6c197763e0428981981e86df1e4c4b7d256f369f6a926e721605
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-      - name: Run Test
-        run: |
-          bash .ci/build/client_build.sh 
-
-
 opensuse_15.3_mlnx_5.6: 
     name: opensuse 15.3 with mlnx 5.6
     runs-on: self-hosted
@@ -329,8 +315,6 @@ opensuse_15.3_mlnx_5.6:
         run: |
           bash .ci/build/client_build.sh 
   
-
-
 sles15_distro: 
     name: sles15 distro
     runs-on: self-hosted

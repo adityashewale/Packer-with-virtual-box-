@@ -1,0 +1,67 @@
+name: client rebuild test
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        type: choice
+        description: Client rebuild with OFED
+        options:
+          - All
+          - ofed x86_64-rhel8.2-mlnx5.0
+          - ofed x86_64-rhel8.3-mlnx5.1
+          - ofed x86_64-rhel8.3-mlnx5.2
+          - ofed x86_64-alma8.4-mlnx5.4
+          - ofed x86_64-alma8.5-mlnx5.5
+          - ofed x86_64-alma8.7-mlnx5.8-lts
+          - ofed x86_64-rocky8.8-mlnx5.8-lts
+          - ofed x86_64-alma9-mlnx5.6
+          - ofed x86_64-alma9-mlnx5.7
+          - ofed x86_64-rocky9.1-mlnx5.8-lts
+          - ofed ubuntu-22.04-mlnx-5.6-gcc-11
+          - ofed ubuntu-22.04-mlnx-5.7
+          - ofed x86_64-open-suse-15.4
+          - ofed x86_64-sles15-mlnx5.0
+          - ofed x86_64-sles15sp2-mlnx5.1
+          - ofed x86_64-sles15sp3-mlnx5.5
+          - ofed x86_64-open-suse-15.3-mlnx5.6
+
+jobs:
+  RHEL_8_2_mlnx_5_0:
+    name: RHEL 8.2 with MLNX 5.0
+    runs-on: self-hosted
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'ofed x86_64-rhel8.2-mlnx5.0' }}
+    container:
+      image: thinkpranav/x86_64-rhel8.2-mlnx5.0@sha256:6acb8cb6c4886a99c6de23ec52e69ce973bf117e0bdd070361431706c0c2a5b6
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Client rebuild
+        run: |
+          bash .ci/build/client_build.sh /usr/src/linux
+
+  RHEL_8_3_mlnx_5_1:
+    name: RHEL 8.3 with MLNX 5.1
+    runs-on: self-hosted
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'ofed x86_64-rhel8.3-mlnx5.1' }}
+    container:
+      image: thinkpranav/x86_64-rhel8.3-mlnx5.1@sha256:12f5c41d8233e3318a724ad8b74409b49474b57752bed0d0a7114a9c227f0164
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Client rebuild
+        run: |
+          bash .ci/build/client_build.sh /usr/src/linux
+
+  RHEL_8_3_mlnx_5_2:
+    name: RHEL 8.3 with MLNX 5.2
+    runs-on: self-hosted
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'ofed x86_64-rhel8.3-mlnx5.2' }}
+    container:
+      image: thinkpranav/x86_64-rhel8.3-mlnx5.2@sha256:47be8197634c1433b18268935d0af3154e93a75193a3474738fd0e68e72d9ad8
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Client rebuild
+        run: |
+          bash .ci/build/client_build.sh /usr/src/linux

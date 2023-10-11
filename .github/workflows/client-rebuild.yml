@@ -1,4 +1,4 @@
-name: client rebuild for distro 
+name: client rebuild for distro
 
 on:
   workflow_dispatch:
@@ -6,20 +6,21 @@ on:
       name:
         type: choice
         description: Client rebuild for distro
-        options: 
-        - All
-        - distro ubuntu23.04-amd64
-        - distro debian12-client-build
-        - distro x86_64-sles15
-        - distro x86_64-sles15sp2
-        - distro x86_64-sles15sp3
+        options:
+          - All
+          - distro ubuntu23.04-amd64
+          - distro debian12-client-build
+          - distro x86_64-sles15
+          - distro x86_64-sles15sp2
+          - distro x86_64-sles15sp3
+
 jobs:
-    Ubuntu_23_04: 
+  Ubuntu_23_04:
     name: Ubuntu 23.04
     runs-on: self-hosted
-    if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'distro ubuntu23.04-amd64'
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'distro ubuntu23.04-amd64' }}
     container:
-       image: thinkpranav/ubuntu23.04-amd64-build-essential@sha256:691fd1a3b0d33ab42aca6d655bd69e865cf24f5e205ed18ffdff8055a5a1ce0f
+      image: thinkpranav/ubuntu23.04-amd64-build-essential@sha256:691fd1a3b0d33ab42aca6d655bd69e865cf24f5e205ed18ffdff8055a5a1ce0f
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -27,59 +28,54 @@ jobs:
         run: |
           bash .ci/build/client_build.sh /usr/src/linux
 
-    Debian_12:
-    name: debian12 distro 
+  Debian_12:
+    name: Debian 12 client rebuild
     runs-on: self-hosted
-    if: GitHub.event.inputs.name == 'All'  ||  github.event.inputs.name == 'distro debian12-client-build'
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'distro debian12-client-build' }}
     container:
-       image: thinkpranav/debian12-client-build@sha256:26130277c017a216b00df43f9e32d2e03d0e6da6a2d17c7e2e345f9f67186619
+      image: thinkpranav/debian12-client-build@sha256:26130277c017a216b00df43f9e32d2e03d0e6da6a2d17c7e2e345f9f67186619
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
       - name: Run client rebuild for Debian 12
         run: |
           bash .ci/build/client_build.sh /usr/src/linux
-    sles15_distro: 
+
+  sles15_distro:
     name: sles15 distro
     runs-on: self-hosted
-    if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'distro x86_64-sles15'
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'distro x86_64-sles15' }}
     container:
-       image: thinkpranav/x86_64-sles15@sha256:a7e3937951f22987bdff69840fa72bc98cb6c9c4a63055934efbdad81451d58b
+      image: thinkpranav/x86_64-sles15@sha256:a7e3937951f22987bdff69840fa72bc98cb6c9c4a63055934efbdad81451d58b
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
       - name: Run Test
         run: |
-          bash .ci/build/client_build.sh 
+          bash .ci/build/client_build.sh
 
-    sles15sp2_distro: 
+  sles15sp2_distro:
     name: sles15sp2 distro
     runs-on: self-hosted
-    if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'distro x86_64-sles15sp2'
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'distro x86_64-sles15sp2' }}
     container:
-       image: thinkpranav/x86_64-sles15sp2@sha256:95651daaa37f6196718d743614f4bedd2ea5db6c2b029a9e20dd4da02ca21345
+      image: thinkpranav/x86_64-sles15sp2@sha256:95651daaa37f6196718d743614f4bedd2ea5db6c2b029a9e20dd4da02ca21345
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
       - name: Run Test
         run: |
-          bash .ci/build/client_build.sh 
+          bash .ci/build/client_build.sh
 
-    sles15sp3_distro: 
+  sles15sp3_distro:
     name: sles15sp3 distro
     runs-on: self-hosted
-    if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'distro x86_64-sles15sp3'
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'distro x86_64-sles15sp3' }}
     container:
-       image: thinkpranav/x86_64-sles15sp3@sha256:e34e4f87af9eaf2ad5ed3a21fcd833f24046dd05db0c3be1ee4d1f100a790df2
+      image: thinkpranav/x86_64-sles15sp3@sha256:e34e4f87af9eaf2ad5ed3a21fcd833f24046dd05db0c3be1ee4d1f100a790df2
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
       - name: Run Test
         run: |
-          bash .ci/build/client_build.sh 
- 
-
-       
-  
-  
-
+          bash .ci/build/client_build.sh

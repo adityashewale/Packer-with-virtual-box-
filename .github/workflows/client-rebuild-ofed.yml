@@ -1,67 +1,230 @@
-name: client rebuild test
+name: MLNX ofed client rebuild
 
 on:
   workflow_dispatch:
     inputs:
       name:
         type: choice
-        description: Client rebuild with OFED
+        description: Client rebuild for distro
         options:
           - All
-          - ofed x86_64-rhel8.2-mlnx5.0
-          - ofed x86_64-rhel8.3-mlnx5.1
-          - ofed x86_64-rhel8.3-mlnx5.2
-          - ofed x86_64-alma8.4-mlnx5.4
-          - ofed x86_64-alma8.5-mlnx5.5
-          - ofed x86_64-alma8.7-mlnx5.8-lts
-          - ofed x86_64-rocky8.8-mlnx5.8-lts
-          - ofed x86_64-alma9-mlnx5.6
-          - ofed x86_64-alma9-mlnx5.7
-          - ofed x86_64-rocky9.1-mlnx5.8-lts
-          - ofed ubuntu-22.04-mlnx-5.6-gcc-11
-          - ofed ubuntu-22.04-mlnx-5.7
-          - ofed x86_64-open-suse-15.4
-          - ofed x86_64-sles15-mlnx5.0
-          - ofed x86_64-sles15sp2-mlnx5.1
-          - ofed x86_64-sles15sp3-mlnx5.5
-          - ofed x86_64-open-suse-15.3-mlnx5.6
+          - distro x86_64-debian10
+          - distro debian12-client-build
+          - distro x86_64-ubuntu20.04-kernel
+          - distro ubuntu22.04-clang-14
+          - distro ubuntu23.04-amd64
+          - distro x86_64-sles15
+          - distro x86_64-sles15sp2
+          - distro x86_64-sles15sp3
+          - distro alma-8.5-kernel
+          - distro x86_64-rhel8
+          - distro rockylinux-8.8-kernel
+          - distro rockylinux-9.2-kernel
+          - distro x86_64-opensuse15.4
+          - compiler gcc-7 x86_64-ubuntu18.04-gcc7
+          - compiler gcc-11 ubuntu22.04-amd64
 
 jobs:
-  RHEL_8_2_mlnx_5_0:
-    name: RHEL 8.2 with MLNX 5.0
+  Debian_10_distro:
+    name: Debian 10 distro
     runs-on: self-hosted
-    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'ofed x86_64-rhel8.2-mlnx5.0' }}
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'distro x86_64-debian10' }}
     container:
-      image: thinkpranav/x86_64-rhel8.2-mlnx5.0@sha256:6acb8cb6c4886a99c6de23ec52e69ce973bf117e0bdd070361431706c0c2a5b6
+      image: thinkpranav/x86_64-debian10@sha256:dd22777a7c2e5386a3cba1cc656fb5f85b63721f21ced4fc50280a78718a7d3b
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
-      - name: Client rebuild
+        uses: actions/checkout@v2
+      - name: Run Test
+        run: |
+          bash .ci/build/client_build.sh 
+  
+
+  Debian_12_distro:
+    name: Debian 12 client rebuild
+    runs-on: self-hosted
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'distro debian12-client-build' }}
+    container:
+      image: thinkpranav/debian12-client-build@sha256:26130277c017a216b00df43f9e32d2e03d0e6da6a2d17c7e2e345f9f67186619
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Run client rebuild for Debian 12
+        run: |
+          bash .ci/build/client_build.sh
+
+
+  Ubuntu_20_04_distro:
+    name: Ubuntu 20.04 distro
+    runs-on: self-hosted
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'distro x86_64-ubuntu20.04-kernel' }}
+    container:
+      image: thinkpranav/x86_64-ubuntu20.04-kernel@sha256:e997b96f2e8b91ad2d7de18950fb8062c7460cbb8a895843bbf991f63cc32382
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Run Test
+        run: |
+          bash .ci/build/client_build.sh 
+
+  Ubuntu_22_04_clang_distro:
+    name: Ubuntu 22.04 with clang distro
+    runs-on: self-hosted
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'distro ubuntu22.04-clang-14' }}
+    container:
+      image: thinkpranav/x86_64-ubuntu20.04-kernel@sha256:e997b96f2e8b91ad2d7de18950fb8062c7460cbb8a895843bbf991f63cc32382
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Run Test
+        run: |
+          bash .ci/build/client_build.sh 
+
+  Ubuntu_23_04_distro:
+    name: Ubuntu 23.04
+    runs-on: self-hosted
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'distro ubuntu23.04-amd64' }}
+    container:
+      image: thinkpranav/ubuntu23.04-amd64-build-essential@sha256:691fd1a3b0d33ab42aca6d655bd69e865cf24f5e205ed18ffdff8055a5a1ce0f
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Run Test
+        run: |
+          bash .ci/build/client_build.sh 
+
+ 
+  sles15_distro:
+    name: sles15 distro
+    runs-on: self-hosted
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'distro x86_64-sles15' }}
+    container:
+      image: thinkpranav/x86_64-sles15@sha256:a7e3937951f22987bdff69840fa72bc98cb6c9c4a63055934efbdad81451d58b
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Run Test
+        run: |
+          bash .ci/build/client_build.sh
+
+  sles15sp2_distro:
+    name: sles15sp2 distro
+    runs-on: self-hosted
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'distro x86_64-sles15sp2' }}
+    container:
+      image: thinkpranav/x86_64-sles15sp2@sha256:95651daaa37f6196718d743614f4bedd2ea5db6c2b029a9e20dd4da02ca21345
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Run Test
+        run: |
+          bash .ci/build/client_build.sh
+
+  sles15sp3_distro:
+    name: sles15sp3 distro
+    runs-on: self-hosted
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'distro x86_64-sles15sp3' }}
+    container:
+      image: thinkpranav/x86_64-sles15sp3@sha256:e34e4f87af9eaf2ad5ed3a21fcd833f24046dd05db0c3be1ee4d1f100a790df2
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Run Test
+        run: |
+          bash .ci/build/client_build.sh
+    
+  Alma_8_5_distro:
+    name: Almalinux 8.5 distro
+    runs-on: self-hosted
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'distro alma-8.5-kernel' }}
+    container:
+      image: thinkpranav/alma-8.5-kernel@sha256:007b4174bccf997585bb0d07f0cfcc31d8e890e7fccaf9cf892fb2e2e3cf9951
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Run Test
+        run: |
+          bash .ci/build/client_build.sh
+
+  
+  rhel8_distro:
+    name: RHEL 8 distro
+    runs-on: self-hosted
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'distro x86_64-rhel8' }}
+    container:
+      image: thinkpranav/x86_64-rhel8@sha256:08cfedf8b5d1aa66be9d2b36d09f9d97258dcf78f9153be558612c42f1575a89
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Run Test
+        run: |
+          bash .ci/build/client_build.sh
+  
+  rockylinux_8_8_distro:
+    name: Rockylinux 8.8 distro
+    runs-on: self-hosted
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'distro rockylinux-8.8-kernel' }}
+    container:
+      image: thinkpranav/rockylinux-8.8-client-rebuild@sha256:54f3fff02ae2673c8d2fef5933d2f0814b24b64f278c64f4bff5f99de742b879
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Run Test
         run: |
           bash .ci/build/client_build.sh /usr/src/linux
 
-  RHEL_8_3_mlnx_5_1:
-    name: RHEL 8.3 with MLNX 5.1
+  rockylinux_9_2_distro:
+    name: Rockylinux 9.2 distro
     runs-on: self-hosted
-    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'ofed x86_64-rhel8.3-mlnx5.1' }}
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'distro rockylinux-9.2-kernel' }}
     container:
-      image: thinkpranav/x86_64-rhel8.3-mlnx5.1@sha256:12f5c41d8233e3318a724ad8b74409b49474b57752bed0d0a7114a9c227f0164
+      image: thinkpranav/rockylinux-9.2-build-essential@sha256:79aae1812a073d04129fbecc71093d4d8330bcf0b3914f5bf7f3f5f3eff1b452
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
-      - name: Client rebuild
+        uses: actions/checkout@v2
+      - name: Run Test
         run: |
           bash .ci/build/client_build.sh /usr/src/linux
 
-  RHEL_8_3_mlnx_5_2:
-    name: RHEL 8.3 with MLNX 5.2
+  opensuse_15_4_distro:
+    name: opensuse 15.4 distro
     runs-on: self-hosted
-    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'ofed x86_64-rhel8.3-mlnx5.2' }}
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'distro x86_64-opensuse15.4' }}
     container:
-      image: thinkpranav/x86_64-rhel8.3-mlnx5.2@sha256:47be8197634c1433b18268935d0af3154e93a75193a3474738fd0e68e72d9ad8
+      image: thinkpranav/x86_64-opensuse15.4@sha256:6afb3dcdd719748a3c7662c075435eaaaf06a6a2fce1b0bd6e722cb173b5a0e3
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
-      - name: Client rebuild
+        uses: actions/checkout@v2
+      - name: Run Test
         run: |
-          bash .ci/build/client_build.sh /usr/src/linux
+          bash .ci/build/client_build.sh 
+  
+  ubuntu18_04_gcc7_compiler:
+    name: ubuntu 18.04 gcc7 distro
+    runs-on: self-hosted
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'compiler gcc-7 x86_64-ubuntu18.04-gcc7' }}
+    container:
+      image: thinkpranav/x86_64-ubuntu18.04-gcc7@sha256:c6154b1df8444fbb309277c9b284a21827300adbd6942f6b9519b0dbca4fd653
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Run Test
+        run: |
+          bash .ci/build/client_build.sh 
+  
+  ubuntu22_04_gcc11_compiler:
+    name: ubuntu 18.04 gcc11 distro
+    runs-on: self-hosted
+    if: ${{ github.event.inputs.name == 'All' || github.event.inputs.name == 'compiler gcc-11 ubuntu22.04-amd64' }}
+    container:
+      image: thinkpranav/ubuntu22.04-amd64-client-build@sha256:1c24dc8fb4f2713146cf89ded55df628cc56bd98cfe361e6d5f540ffc9c6f668
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Run Test
+        run: |
+          bash .ci/build/client_build.sh 
+      
+  
+
+  
+

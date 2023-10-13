@@ -1,0 +1,39 @@
+name: client rebuild for compiler's
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        type: choice
+        description: Client rebuild for compiler's
+        options: 
+        - All
+        - compiler gcc-7 x86_64-ubuntu18.04-gcc7
+        - compiler gcc-11 ubuntu22.04-amd64
+
+jobs:
+  ubuntu18_04_gcc_7:
+       name: ubuntu 18.04 with gcc 7 compiler
+       runs-on: self-hosted
+       if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'compiler gcc-7 x86_64-ubuntu18.04-gcc7'
+       container:
+        image: thinkpranav/x86_64-ubuntu18.04-gcc7@sha256:c6154b1df8444fbb309277c9b284a21827300adbd6942f6b9519b0dbca4fd653
+       steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+        - name: Client rebuild
+          run: |
+             bash .ci/build/client_build.sh
+
+  ubuntu22_04_gcc_11:
+       name: ubuntu 22.04 with gcc 11 compiler
+       runs-on: self-hosted
+       if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'compiler gcc-11 ubuntu22.04-amd64'
+       container:
+        image: thinkpranav/ubuntu22.04-amd64-client-build@sha256:1c24dc8fb4f2713146cf89ded55df628cc56bd98cfe361e6d5f540ffc9c6f668
+       steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+        - name: Client rebuild
+          run: |
+             bash .ci/build/client_build.sh

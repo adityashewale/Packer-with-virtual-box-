@@ -1,4 +1,4 @@
-name: client rebuild test 
+name: client rebuild for MLNX OFED 
 
 on:
   workflow_dispatch:

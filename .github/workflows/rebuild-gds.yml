@@ -1,0 +1,39 @@
+name: client rebuild for GDS 
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        type: choice
+        description: Client rebuild for GDS 
+        options: 
+        - All
+        - gds-ofed x86_64-rocky8.4-mlnx5.4
+        - gds-ofed x86_64-ubuntu20.04-mlnx-5.4
+
+jobs:
+  Rockylinux_8_4_mlnx_5_4:
+       name: Rockylinux 8.4 with mlnx 5.4
+       runs-on: self-hosted
+       if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'gds-ofed x86_64-rocky8.4-mlnx5.4'
+       container:
+        image: thinkpranav/x86_64-rocky8.4-mlnx5.4@sha256:056476c3b168526de08a5f102440c9aa1d7b0827a8e91e3ea84065974390b765
+       steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+        - name: Client rebuild
+          run: |
+            bash .ci/build/client_build.sh /usr/src/linux /usr/src/mlnx-ofa_kernel-5.4/drivers/nvme/host/
+  
+  Ubuntu_20_04_mlnx_5_4:
+       name: Ubuntu 20.04 mlnx 5.4
+       runs-on: self-hosted
+       if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'gds-ofed x86_64-ubuntu20.04-mlnx-5.4'
+       container:
+        image: thinkpranav/x86_64-ubuntu20.04-mlnx-5.4@sha256:d9a28be195032558d74f194bef35275bb750c37eb26ce42e264826fe3fbc7c0b
+       steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+        - name: Client rebuild
+          run: |
+            bash .ci/build/client_build.sh /usr/src/linux-headers-5.4.0-62-generic/ /usr/src/mlnx-ofed-kernel-5.4/drivers/nvme/host/

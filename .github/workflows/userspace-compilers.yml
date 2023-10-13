@@ -1,0 +1,25 @@
+name: client rebuild for userspace compiler  
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        type: choice
+        description: Client rebuild with OFED 
+        options: 
+        - All
+        - userspace compiler=gcc11
+
+jobs:
+  Userspace_compiler_gcc11:
+       name: Userspce compiler gcc 11
+       runs-on: self-hosted
+       if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'userspace compiler=gcc11'
+       container:
+        image: thinkpranav/ubuntu22.04-amd64-build-essential@sha256:4a67067e9f264ebdc9030da2f97247f5d91bab9fffcd291c5549988d4b50ea6f
+       steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+        - name: Client rebuild
+          run: |
+            bash .ci/build/userspace_build.sh 

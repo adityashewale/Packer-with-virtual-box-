@@ -5,7 +5,7 @@ on:
     inputs:
       name:
         type: choice
-        description: Client rebuild with OFED 
+        description: Client rebuild for userspace compiler
         options: 
         - All
         - userspace compiler=gcc11

@@ -9,7 +9,7 @@ jobs:
       - name: Set Workflow Run ID and Job ID as Environment Variables
         run: |
           echo "Setting environment variables... "
-          echo "run id: $GITHUB_RUN_ID, job id: $GITHUB_JOB"
+          echo "Job ID: $GITHUB_JOB"
           echo "GITHUB_RUN_ID=$GITHUB_RUN_ID" >> $GITHUB_ENV
           echo "GITHUB_JOB=$GITHUB_JOB" >> $GITHUB_ENV
           echo "GITHUB_RUN_NUMBER=$GITHUB_RUN_NUMBER" >> $GITHUB_ENV

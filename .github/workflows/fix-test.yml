@@ -11,6 +11,7 @@ jobs:
           echo "Setting environment variables... "
           echo "Job ID: ${GITHUB_JOB}" 
           echo "github run number: ${GITHUB_RUN_NUMBER}"
+          echo "id: ${GITHUB_JOB}_${GITHUB_RUN_NUMBER}"
           echo "github workflow number: ${GITHUB_RUN_ID}"
           echo "GITHUB_RUN_ID=$GITHUB_RUN_ID" >> $GITHUB_ENV
           echo "GITHUB_JOB=$GITHUB_JOB" >> $GITHUB_ENV

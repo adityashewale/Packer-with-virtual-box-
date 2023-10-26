@@ -1,0 +1,146 @@
+name: tidy  
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        type: choice
+        description: tidy for comm_debug,common,ctl,fsck,helperd,meta,mgmtd,mon,storage
+        options: 
+        - All
+        - add_tidy comm_debug
+        - add_tidy common
+        - add_tidy ctl
+        - add_tidy fsck
+        - add_tidy helperd
+        - add_tidy meta
+        - add_tidy mgmtd
+        - add_tidy mon
+        - add_tidy storage
+
+jobs:
+  tidy_comm_debug:
+       name: tidy test for comm_debug
+       runs-on: self-hosted
+       if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'add_tidy comm_debug'
+       container:
+        image: thinkpranav/x86_64-ubuntu20.04@sha256:667f2b5384785a4e0fcbcbc7a4c6a912fb9008b11789ece6a0ba3964aa3b43e7
+       steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+        - name: tidy test for comm_debug
+          run: |
+            bash .ci/build/userspace_tidy.sh comm_debug
+
+
+
+  tidy_common:
+       name: tidy test for common
+       runs-on: self-hosted
+       if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'add_tidy common'
+       container:
+        image: thinkpranav/x86_64-ubuntu20.04@sha256:667f2b5384785a4e0fcbcbc7a4c6a912fb9008b11789ece6a0ba3964aa3b43e7
+       steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+        - name: tidy test for common
+          run: |
+            bash .ci/build/userspace_tidy.sh common
+      
+  
+  tidy_ctl:
+       name: tidy test for ctl
+       runs-on: self-hosted
+       if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'add_tidy ctl'
+       container:
+        image: thinkpranav/x86_64-ubuntu20.04@sha256:667f2b5384785a4e0fcbcbc7a4c6a912fb9008b11789ece6a0ba3964aa3b43e7
+       steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+        - name: tidy test for ctl
+          run: |
+            bash .ci/build/userspace_tidy.sh ctl
+            
+  tidy_fsck:
+       name: tidy test for fsck
+       runs-on: self-hosted
+       if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'add_tidy fsck'
+       container:
+        image: thinkpranav/x86_64-ubuntu20.04@sha256:667f2b5384785a4e0fcbcbc7a4c6a912fb9008b11789ece6a0ba3964aa3b43e7
+       steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+        - name: tidy test for fsck
+          run: |
+            bash .ci/build/userspace_tidy.sh fsck
+  
+
+  tidy_helperd:
+       name: tidy test for helperd
+       runs-on: self-hosted
+       if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'add_tidy helperd'
+       container:
+        image: thinkpranav/x86_64-ubuntu20.04@sha256:667f2b5384785a4e0fcbcbc7a4c6a912fb9008b11789ece6a0ba3964aa3b43e7
+       steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+        - name: tidy test for helperd
+          run: |
+            bash .ci/build/userspace_tidy.sh helperd
+  
+  
+  tidy_meta:
+       name: tidy test for meta
+       runs-on: self-hosted
+       if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'add_tidy meta'
+       container:
+        image: thinkpranav/x86_64-ubuntu20.04@sha256:667f2b5384785a4e0fcbcbc7a4c6a912fb9008b11789ece6a0ba3964aa3b43e7
+       steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+        - name: tidy test for meta
+          run: |
+            bash .ci/build/userspace_tidy.sh meta
+  
+
+  tidy_mgmtd:
+       name: tidy test for mgmtd
+       runs-on: self-hosted
+       if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'add_tidy mgmtd'
+       container:
+        image: thinkpranav/x86_64-ubuntu20.04@sha256:667f2b5384785a4e0fcbcbc7a4c6a912fb9008b11789ece6a0ba3964aa3b43e7
+       steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+        - name: tidy test for mgmtd
+          run: |
+            bash .ci/build/userspace_tidy.sh mgmtd
+    
+
+  tidy_mon:
+       name: tidy test for mon
+       runs-on: self-hosted
+       if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'add_tidy mon'
+       container:
+        image: thinkpranav/x86_64-ubuntu20.04@sha256:667f2b5384785a4e0fcbcbc7a4c6a912fb9008b11789ece6a0ba3964aa3b43e7
+       steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+        - name: tidy test for mon
+          run: |
+            bash .ci/build/userspace_tidy.sh mon
+  
+
+  tidy_storage:
+       name: tidy test for storage
+       runs-on: self-hosted
+       if:  GitHub.event.inputs.name == 'All'  ||  Github.event.inputs.name == 'add_tidy storage'
+       container:
+        image: thinkpranav/x86_64-ubuntu20.04@sha256:667f2b5384785a4e0fcbcbc7a4c6a912fb9008b11789ece6a0ba3964aa3b43e7
+       steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+        - name: tidy test for storage
+          run: |
+            bash .ci/build/userspace_tidy.sh storage
+  
